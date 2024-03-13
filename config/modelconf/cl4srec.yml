@@ -1,0 +1,64 @@
+optimizer:
+  name: adam
+  lr: 1.0e-4
+  final_lr: 1.0e-6
+  weight_decay: 0
+
+train:
+  model_test_run: false
+  weighted_loss_fn: true
+  epoch: 1
+  batch_size: 16
+  save_model: true
+  log_loss: true
+  test_step: 1
+  reproducible: true
+  seed: 2023
+  tensorboard: true
+  conf_mat: false
+  ssl: false
+  gradient_accumulation: true
+  accumulation_steps: 4
+
+test:
+  metrics: [recall, precision]
+  k: [1]
+  batch_size: 16
+
+data:
+  type: sequential
+  name: aug
+  seq_aug: false
+  dynamic_context_window_length: 100
+
+model:
+  name: cl4srec
+  context_encoder: lstm
+  interaction_encoder: sasrec
+  dropout_rate: 0.1
+  n_layers: 2
+  embedding_size: 64
+  n_heads: 2
+  max_seq_len: 10
+  lmd: 0.1
+  tau: 1
+
+lstm:
+  hidden_size: 64
+  num_layers: 30
+  output_size: 256
+
+tune:
+  enable: false
+  hyperparameters: [dropout_rate, lmb, tau]
+  dropout_rate: [0.1, 0.3, 0.5]
+  lmb: [0.05, 0.1, 0.2]
+  tau: [0.5, 0.7, 0.9]
+
+duorec:
+  inner_size: 256
+  hidden_dropout_prob: 0.5
+  attn_dropout_prob: 0.5
+  hidden_act: 'gelu'
+  layer_norm_eps: 1.0e-12
+  initializer_range: 0.02
