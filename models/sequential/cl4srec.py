@@ -231,6 +231,6 @@ class CL4SRec(BaseModel):
         return loss + cl_loss, loss_dict
     
     def full_predict(self, batch_data):
-        _, batch_seqs, _, batch_time_deltas, batch_dynamic_context, batch_static_context, sequence_length, common_item = batch_data
+        _, batch_seqs, _, _, batch_dynamic_context, batch_static_context, sequence_length, _ = batch_data
         seq_output = self.forward(batch_seqs, batch_dynamic_context, batch_static_context, sequence_length)
         return seq_output

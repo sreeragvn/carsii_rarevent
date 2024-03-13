@@ -7,21 +7,21 @@ optimizer:
 train:
   model_test_run: false
   weighted_loss_fn: true
-  epoch: 1
+  epoch: 500
   batch_size: 16
   save_model: true
   log_loss: true
   test_step: 1
   reproducible: true
   seed: 2023
-  tensorboard: true
+  tensorboard: false
   conf_mat: false
   ssl: false
   gradient_accumulation: true
   accumulation_steps: 4
 
 test:
-  metrics: [recall, precision]
+  metrics: [recall, precision, f1score, accuracy]
   k: [1]
   batch_size: 16
 
